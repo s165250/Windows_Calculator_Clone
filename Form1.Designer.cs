@@ -66,15 +66,21 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button0 = new System.Windows.Forms.Button();
             this.ResultBox = new System.Windows.Forms.RichTextBox();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.blaBlaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.blaBlaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.BackgroundFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
             this.numericPanel.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.Controls.Add(this.panel3);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.numericPanel);
@@ -460,6 +466,35 @@
             this.ResultBox.TabIndex = 12;
             this.ResultBox.Text = "0";
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.blaBlaToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(384, 24);
+            this.menuStrip1.TabIndex = 13;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // blaBlaToolStripMenuItem
+            // 
+            this.blaBlaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.blaBlaToolStripMenuItem1});
+            this.blaBlaToolStripMenuItem.Name = "blaBlaToolStripMenuItem";
+            this.blaBlaToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.blaBlaToolStripMenuItem.Text = "View";
+            // 
+            // blaBlaToolStripMenuItem1
+            // 
+            this.blaBlaToolStripMenuItem1.Name = "blaBlaToolStripMenuItem1";
+            this.blaBlaToolStripMenuItem1.Size = new System.Drawing.Size(182, 22);
+            this.blaBlaToolStripMenuItem1.Text = "Change Background";
+            this.blaBlaToolStripMenuItem1.Click += new System.EventHandler(this.blaBlaToolStripMenuItem1_Click);
+            // 
+            // BackgroundFileDialog
+            // 
+            this.BackgroundFileDialog.FileName = "Select Background";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -467,6 +502,7 @@
             this.ClientSize = new System.Drawing.Size(384, 561);
             this.Controls.Add(this.ResultBox);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.menuStrip1);
             this.Name = "Form1";
             this.Text = "Calculator";
             this.panel1.ResumeLayout(false);
@@ -474,7 +510,10 @@
             this.panel3.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.numericPanel.ResumeLayout(false);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -513,6 +552,10 @@
         private System.Windows.Forms.Button buttonPERCENT;
         private System.Windows.Forms.Button buttonDIV;
         private System.Windows.Forms.RichTextBox ResultBox;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem blaBlaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem blaBlaToolStripMenuItem1;
+        private System.Windows.Forms.OpenFileDialog BackgroundFileDialog;
     }
 }
 

@@ -412,5 +412,15 @@ namespace CalculatorCopy
             }
             resultCalculated = true;
         }
+
+        private void blaBlaToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            this.BackgroundFileDialog.ShowDialog();
+            this.BackgroundImage = Image.FromFile(this.BackgroundFileDialog.FileName);
+            panel1.BackColor = Color.FromArgb(0, 0, 0, 0);
+            panel2.BackColor = Color.FromArgb(0, 0, 0, 0);
+            panel3.BackColor = Color.FromArgb(0, 0, 0, 0);
+            numericPanel.BackColor = Color.FromArgb(0, 0, 0, 0);
+        }
     }
 }
