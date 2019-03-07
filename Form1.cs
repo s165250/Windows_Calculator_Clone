@@ -188,53 +188,25 @@ namespace CalculatorCopy
         private void buttonPLUS_Click(object sender, EventArgs e)
         {
             operationCode = 1;
-            if(Double.TryParse(this.ResultBox.Text, out a))
-            {
-                this.ResultBox.Text = "0";
-            }
-            else
-            {
-                this.ResultBox.Text = "Liczba została źle wpisana!";
-            }
+            SaveFirstNumber();
         }
 
         private void buttonMINUS_Click(object sender, EventArgs e)
         {
             operationCode = 2;
-            if (Double.TryParse(this.ResultBox.Text, out a))
-            {
-                this.ResultBox.Text = "0";
-            }
-            else
-            {
-                this.ResultBox.Text = "Liczba została źle wpisana!";
-            }
+            SaveFirstNumber();
         }
 
         private void buttonMUL_Click(object sender, EventArgs e)
         {
             operationCode = 3;
-            if (Double.TryParse(this.ResultBox.Text, out a))
-            {
-                this.ResultBox.Text = "0";
-            }
-            else
-            {
-                this.ResultBox.Text = "Liczba została źle wpisana!";
-            }
+            SaveFirstNumber();
         }
 
         private void buttonDIV_Click(object sender, EventArgs e)
         {
             operationCode = 4;
-            if (Double.TryParse(this.ResultBox.Text, out a))
-            {
-                this.ResultBox.Text = "0";
-            }
-            else
-            {
-                this.ResultBox.Text = "Liczba została źle wpisana!";
-            }
+            SaveFirstNumber();
         }
 
         private void buttonPM_Click(object sender, EventArgs e)
@@ -368,49 +340,7 @@ namespace CalculatorCopy
 
         private void buttonRESULT_Click(object sender, EventArgs e)
         {
-            switch(operationCode)
-            {
-                // Dodawanie
-                case 1:
-                    if(Double.TryParse(this.ResultBox.Text, out b))
-                    {
-                        a += b;
-                        this.ResultBox.Text = a.ToString();
-                    }
-                    break;
-                // Odejmowanie
-                case 2:
-                    if (Double.TryParse(this.ResultBox.Text, out b))
-                    {
-                        a -= b;
-                        this.ResultBox.Text = a.ToString();
-                    }
-                    break;
-                // Mnożenie
-                case 3:
-                    if (Double.TryParse(this.ResultBox.Text, out b))
-                    {
-                        a *= b;
-                        this.ResultBox.Text = a.ToString();
-                    }
-                    break;
-                // Dzielenie
-                case 4:
-                    if (Double.TryParse(this.ResultBox.Text, out b))
-                    {
-                        if (b != 0)
-                        {
-                            a /= b;
-                            this.ResultBox.Text = a.ToString();
-                        }
-                        else
-                        {
-                            this.ResultBox.Text = "Nie można dzielić przez 0!";
-                        }
-                    }
-                    break;
-            }
-            resultCalculated = true;
+            Calculate();
         }
 
         private void blaBlaToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -422,5 +352,180 @@ namespace CalculatorCopy
             panel3.BackColor = Color.FromArgb(0, 0, 0, 0);
             numericPanel.BackColor = Color.FromArgb(0, 0, 0, 0);
         }
+
+        private void ResultBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char Typed = e.KeyChar;
+            bool goodKey = (char.IsDigit(Typed) || Typed == ',' || Typed == '.' || Typed == (char)ENTER || Typed == (char)BACKSPACE);
+            e.Handled = true;
+            if (goodKey)
+            {
+                if (this.ResultBox.Text.Length < this.ResultBox.MaxLength)
+                {
+                    if (char.IsDigit(Typed))
+                    {
+                        if (this.ResultBox.Text == "0" && this.ResultBox.Text != "Nie można dzielić przez 0!" && this.ResultBox.Text != "Liczba została źle wpisana!")
+                        {
+                            this.ResultBox.Text = Typed.ToString();
+                            this.ResultBox.SelectionStart = this.ResultBox.Text.Length;
+                        }
+                        else
+                        {
+                            this.ResultBox.Text += Typed.ToString();
+                            this.ResultBox.SelectionStart = this.ResultBox.Text.Length;
+                        }
+                    }
+                    else if (Typed == ',' || Typed == '.')
+                    {
+                        if (this.ResultBox.Text[this.ResultBox.Text.Length - 1] != ',' && 
+                            this.ResultBox.Text != "Nie można dzielić przez 0!" && this.ResultBox.Text != "Liczba została źle wpisana!" 
+                            && resultCalculated == false)
+                        {
+                            this.ResultBox.Text += ",";
+                            this.ResultBox.SelectionStart = this.ResultBox.Text.Length;
+                        }
+                    }
+                }
+                if (Typed == (char)BACKSPACE)
+                {
+                    if (this.ResultBox.Text.Length > 1)
+                    {
+                        this.ResultBox.Text = this.ResultBox.Text.Remove(this.ResultBox.Text.Length - 1);
+                        this.ResultBox.SelectionStart = this.ResultBox.Text.Length;
+                    }
+                    else
+                    {
+                        this.ResultBox.Text = "0";
+                        this.ResultBox.SelectionStart = this.ResultBox.Text.Length;
+                    }
+                }
+                if (Typed == (char)ENTER)
+                {
+                    Calculate();
+                }
+            }
+            else
+            {
+                switch(Typed)
+                {
+                    case '+':
+                        operationCode = 1;
+                        SaveFirstNumber();
+                        break;
+                    case '-':
+                        operationCode = 2;
+                        SaveFirstNumber();
+                        break;
+                    case '*':
+                        operationCode = 3;
+                        SaveFirstNumber();
+                        break;
+                    case '/':
+                        SaveFirstNumber();
+                        operationCode = 4;
+                        break;
+                    case '=':
+                        Calculate();
+                        break;
+                }
+            }
+
+        }
+
+        private void ResultBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void Add()
+        {
+            if (Double.TryParse(this.ResultBox.Text, out b))
+            {
+                a += b;
+                this.ResultBox.Text = a.ToString();
+            }
+            else
+            {
+                this.ResultBox.Text = "Liczba została źle wpisana!";
+            }
+        }
+        private void Subtract()
+        {
+            if (Double.TryParse(this.ResultBox.Text, out b))
+            {
+                a -= b;
+                this.ResultBox.Text = a.ToString();
+            }
+            else
+            {
+                this.ResultBox.Text = "Liczba została źle wpisana!";
+            }
+        }
+        private void Multiplicate()
+        {
+            if (Double.TryParse(this.ResultBox.Text, out b))
+            {
+                a *= b;
+                this.ResultBox.Text = a.ToString();
+            }
+            else
+            {
+                this.ResultBox.Text = "Liczba została źle wpisana!";
+            }
+        }
+        private void Divide()
+        {
+            if (Double.TryParse(this.ResultBox.Text, out b))
+            {
+                if (b != 0)
+                {
+                    a /= b;
+                    this.ResultBox.Text = a.ToString();
+                }
+                else
+                {
+                    this.ResultBox.Text = "Nie można dzielić przez 0!";
+                }
+            }
+            else
+            {
+                this.ResultBox.Text = "Liczba została źle wpisana!";
+            }
+        }
+        private void Calculate()
+        {
+            switch (operationCode)
+            {
+                // Dodawanie
+                case 1:
+                    Add();
+                    break;
+                // Odejmowanie
+                case 2:
+                    Subtract();
+                    break;
+                // Mnożenie
+                case 3:
+                    Multiplicate();
+                    break;
+                // Dzielenie
+                case 4:
+                    Divide();
+                    break;
+            }
+            resultCalculated = true;
+        }
+        private void SaveFirstNumber()
+        {
+            if (Double.TryParse(this.ResultBox.Text, out a))
+            {
+                this.ResultBox.Text = "0";
+            }
+            else
+            {
+                this.ResultBox.Text = "Liczba została źle wpisana!";
+            }
+        }
     }
 }
+

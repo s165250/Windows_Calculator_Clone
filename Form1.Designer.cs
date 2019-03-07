@@ -10,7 +10,10 @@
         private static double b = 0;
         private static double memory = 0;
         private static bool resultCalculated = false;
+        private const int BACKSPACE = 8;
+        private const int ENTER = 13;
         private System.ComponentModel.IContainer components = null;
+
 
         /// <summary>
         /// Wyczyść wszystkie używane zasoby.
@@ -70,6 +73,10 @@
             this.blaBlaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.blaBlaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.BackgroundFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.layoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.defaultToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.darkOrangeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.blueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -458,13 +465,15 @@
             this.ResultBox.Cursor = System.Windows.Forms.Cursors.Default;
             this.ResultBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.ResultBox.Location = new System.Drawing.Point(20, 36);
-            this.ResultBox.MaxLength = 78;
+            this.ResultBox.MaxLength = 40;
             this.ResultBox.Name = "ResultBox";
             this.ResultBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.ResultBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
             this.ResultBox.Size = new System.Drawing.Size(348, 102);
             this.ResultBox.TabIndex = 12;
             this.ResultBox.Text = "0";
+            this.ResultBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ResultBox_KeyDown);
+            this.ResultBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ResultBox_KeyPress);
             // 
             // menuStrip1
             // 
@@ -479,7 +488,8 @@
             // blaBlaToolStripMenuItem
             // 
             this.blaBlaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.blaBlaToolStripMenuItem1});
+            this.blaBlaToolStripMenuItem1,
+            this.layoutToolStripMenuItem});
             this.blaBlaToolStripMenuItem.Name = "blaBlaToolStripMenuItem";
             this.blaBlaToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.blaBlaToolStripMenuItem.Text = "View";
@@ -494,6 +504,34 @@
             // BackgroundFileDialog
             // 
             this.BackgroundFileDialog.FileName = "Select Background";
+            // 
+            // layoutToolStripMenuItem
+            // 
+            this.layoutToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.defaultToolStripMenuItem,
+            this.darkOrangeToolStripMenuItem,
+            this.blueToolStripMenuItem});
+            this.layoutToolStripMenuItem.Name = "layoutToolStripMenuItem";
+            this.layoutToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.layoutToolStripMenuItem.Text = "Layout";
+            // 
+            // defaultToolStripMenuItem
+            // 
+            this.defaultToolStripMenuItem.Name = "defaultToolStripMenuItem";
+            this.defaultToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.defaultToolStripMenuItem.Text = "Default";
+            // 
+            // darkOrangeToolStripMenuItem
+            // 
+            this.darkOrangeToolStripMenuItem.Name = "darkOrangeToolStripMenuItem";
+            this.darkOrangeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.darkOrangeToolStripMenuItem.Text = "Dark Orange";
+            // 
+            // blueToolStripMenuItem
+            // 
+            this.blueToolStripMenuItem.Name = "blueToolStripMenuItem";
+            this.blueToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.blueToolStripMenuItem.Text = "Blue";
             // 
             // Form1
             // 
@@ -556,6 +594,10 @@
         private System.Windows.Forms.ToolStripMenuItem blaBlaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem blaBlaToolStripMenuItem1;
         private System.Windows.Forms.OpenFileDialog BackgroundFileDialog;
+        private System.Windows.Forms.ToolStripMenuItem layoutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem defaultToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem darkOrangeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem blueToolStripMenuItem;
     }
 }
 
